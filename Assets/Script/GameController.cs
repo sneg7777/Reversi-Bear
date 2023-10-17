@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameController
 {
     protected Team turn;
@@ -13,10 +11,13 @@ public class GameController
         GameManager.Instance.Board.PlaceStone(Team.Player2, 28 / Board.CountLines, 28 % Board.CountLines);
         GameManager.Instance.Board.PlaceStone(Team.Player2, 35 / Board.CountLines, 35 % Board.CountLines);
         GameManager.Instance.Board.PlaceStone(Team.Player1, 36 / Board.CountLines, 36 % Board.CountLines);
+
+        Board board = GameManager.Instance.Board;
+        board.SearchForPossiblePlaced(turn, true);
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
 
     }
@@ -28,7 +29,7 @@ public class GameController
 
     protected void PassTurn()
     {
-        GameManager gameManager =  GameManager.Instance;
+        GameManager gameManager = GameManager.Instance;
         if (turn == Team.Player1)
         {
             turn = Team.Player2;

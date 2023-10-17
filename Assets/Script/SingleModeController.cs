@@ -4,12 +4,10 @@ public class SingleModeController : GameController
     public override void InitGame()
     {
         base.InitGame();
-        Board board = GameManager.Instance.Board;
-        board.SearchForPossiblePlaced(turn);
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
 
     }
@@ -26,15 +24,15 @@ public class SingleModeController : GameController
         AddScore(turn, score);
         PassTurn();
         board.ClearForPossiblePlaced();
-        if (!board.SearchForPossiblePlaced(turn))
+        if (!board.SearchForPossiblePlaced(turn, true))
         {
             PassTurn();
-            if(!board.SearchForPossiblePlaced(turn))
+            if (!board.SearchForPossiblePlaced(turn, true))
             {
                 GameEnd();
             }
         }
-            
+
     }
 
 

@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 322056866}
-  showTurnImage: {fileID: 803327330}
+  showCurrentTurnImage: {fileID: 803327330}
   textPlayer1Score: {fileID: 1793531794}
   textPlayer2Score: {fileID: 1726856584}
 --- !u!1 &352998137
@@ -911,7 +911,7 @@ GameObject:
   - component: {fileID: 803327333}
   - component: {fileID: 803327332}
   m_Layer: 5
-  m_Name: ShowTurnImage
+  m_Name: ShowCurrentTurnImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

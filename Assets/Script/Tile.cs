@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum Team
-{ 
+{
     None,
     Player1,
     Player2,
@@ -28,7 +26,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(!isCanPlaced)
+        if (!isCanPlaced)
         {
             return;
         }
@@ -62,7 +60,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public void ShowPossiblePlacement(bool possible)
     {
         isCanPlaced = possible;
-        if(isCanPlaced)
+        if (isCanPlaced)
         {
             stoneCanPlaced.SetActive(true);
         }

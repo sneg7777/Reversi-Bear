@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaceableTile
@@ -35,7 +33,7 @@ public class Board : MonoBehaviour
     public void Awake()
     {
         tilesParent = transform.GetChild(0).gameObject;
-        
+
         tiles = new Tile[CountLines, CountLines];
 
         for (int i = 0; i < MaxCountOfTiles; i++)
@@ -54,24 +52,24 @@ public class Board : MonoBehaviour
     public void Update()
     {
         turningOverTick -= Time.deltaTime;
-        if(stonesTurningOver.Count > 0 && turningOverTick < 0f)
+        if (stonesTurningOver.Count > 0 && turningOverTick < 0f)
         {
             Tile tile = stonesTurningOver.Dequeue();
             turningOverTick = TurningOverDelay;
             tile.PlaceObject(tile.Team);
-            
+
         }
     }
 
     public int PlaceStone(Team team, int column, int row)
     {
-        if(stonesTurningOver.Count > 0)
+        if (stonesTurningOver.Count > 0)
         {
             return -1;
         }
 
         Tile tile = tiles[column, row];
-        if(tile.Team != Team.None)
+        if (tile.Team != Team.None)
         {
             return -1;
         }
@@ -79,7 +77,7 @@ public class Board : MonoBehaviour
         tile.Team = team;
         tile.PlaceObject(team);
 
-        if(team == Team.Player1)
+        if (team == Team.Player1)
         {
             player1Tile.Add(tile);
         }
@@ -88,6 +86,40 @@ public class Board : MonoBehaviour
             player2Tile.Add(tile);
         }
         int score = FindStoneTurnOver(team, column, row);
+
+        return score;
+    }
+
+    public int PlaceStoneByAi()
+    {
+        List<PlaceableTile> selectedTile = new List<PlaceableTile>();
+        foreach (PlaceableTile placeableTile in placeableTiles)
+        {
+            if (selectedTile.Count == 0)
+            {
+                selectedTile.Add(placeableTile);
+                continue;
+            }
+
+            if (selectedTile[0].countCanTurnOver < placeableTile.countCanTurnOver)
+            {
+                selectedTile.Clear();
+                selectedTile.Add(placeableTile);
+            }
+            else if (selectedTile[0].countCanTurnOver == placeableTile.countCanTurnOver)
+            {
+                selectedTile.Add(placeableTile);
+            }
+        }
+
+        if (selectedTile.Count == 0)
+        {
+            return -1;
+        }
+
+        int random = Random.Range(0, selectedTile.Count);
+        int tileNumber = selectedTile[random].tile.Number;
+        int score = PlaceStone(Team.Player2, tileNumber / CountLines, tileNumber % CountLines);
 
         return score;
     }
@@ -102,7 +134,7 @@ public class Board : MonoBehaviour
         while (true)
         {
             count = tempList.Count + 1;
-            if(row - count >= 0)
+            if (row - count >= 0)
             {
                 tile = tiles[column, row - count];
                 if (tile.Team == Team.None)
@@ -110,14 +142,14 @@ public class Board : MonoBehaviour
                     tempList.Clear();
                     break;
                 }
-                else if(tile.Team == Team.Impediments)
+                else if (tile.Team == Team.Impediments)
                 {
                     tempList.Clear();
                     break;
                 }
                 else if (tile.Team == team)
                 {
-                    foreach(Tile temp in tempList)
+                    foreach (Tile temp in tempList)
                     {
                         stoneTurnOver.Add(temp);
                     }
@@ -426,8 +458,19 @@ public class Board : MonoBehaviour
                 player2Tile.Add(turnTile);
             }
         }
+        return CalcScoreGet(stoneTurnOver.Count);
+    }
 
-        return stoneTurnOver.Count * ScoreUnit;
+    public int CalcScoreGet(int countStoneTurnOver)
+    {
+        int totalScore = 0;
+        int overlapScore = 10;
+        for (int i = 0; i < countStoneTurnOver; i++)
+        {
+            totalScore += overlapScore;
+            overlapScore += 10;
+        }
+        return totalScore;
     }
 
     public void ClearForPossiblePlaced()
@@ -439,11 +482,11 @@ public class Board : MonoBehaviour
         placeableTiles.Clear();
     }
 
-    public bool SearchForPossiblePlaced(Team team)
+    public bool SearchForPossiblePlaced(Team team, bool showGuide)
     {
         List<Tile> tempList = new List<Tile>();
         List<Tile> myStone;
-        if(team == Team.Player1)
+        if (team == Team.Player1)
         {
             myStone = player1Tile;
         }
@@ -795,10 +838,14 @@ public class Board : MonoBehaviour
             return false;
         }
 
-        foreach (PlaceableTile placeableTile in placeableTiles)
+        if (showGuide)
         {
-            placeableTile.tile.ShowPossiblePlacement(true);
+            foreach (PlaceableTile placeableTile in placeableTiles)
+            {
+                placeableTile.tile.ShowPossiblePlacement(true);
+            }
         }
+
         return true;
     }
 

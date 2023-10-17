@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using GoblinGames.DesignPattern;
 using TMPro;
+using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -23,7 +21,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         base.Awake();
 
-        gameController = new SingleModeController();
+        //gameController = new SingleModeController();
+        gameController = new AiModeController();
     }
 
     private void Start()
@@ -34,7 +33,7 @@ public class GameManager : MonoSingleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        gameController.Update();
     }
 
 }
