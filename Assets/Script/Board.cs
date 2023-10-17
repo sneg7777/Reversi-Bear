@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaceableTile
@@ -12,18 +13,24 @@ public class Board : MonoBehaviour
 {
     public const int MaxCountOfTiles = 64;
     public const int CountLines = 8;
+    public const int ScoreUnit = 10;
+    public const float TurningOverDelay = 0.15f;
 
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject stone1Prefab;
     [SerializeField] private GameObject stone2Prefab;
+
     private GameObject tilesParent;
-    //private List<Tile> tiles = new List<Tile>();
     private Tile[,] tiles;
     [SerializeField] private List<Tile> player1Tile = new List<Tile>();
     [SerializeField] private List<Tile> player2Tile = new List<Tile>();
     private List<PlaceableTile> placeableTiles = new List<PlaceableTile>();
 
+    private Queue<Tile> stonesTurningOver = new Queue<Tile>();
+    private float turningOverTick;
+
     public Tile[,] Tiles { get { return tiles; } }
+    public int CountStoneTurningOver { get { return stonesTurningOver.Count; } }
 
     public void Awake()
     {
@@ -44,12 +51,29 @@ public class Board : MonoBehaviour
         }
     }
 
-    public bool PlaceStone(Team team, int column, int row)
+    public void Update()
     {
+        turningOverTick -= Time.deltaTime;
+        if(stonesTurningOver.Count > 0 && turningOverTick < 0f)
+        {
+            Tile tile = stonesTurningOver.Dequeue();
+            turningOverTick = TurningOverDelay;
+            tile.PlaceObject(tile.Team);
+            
+        }
+    }
+
+    public int PlaceStone(Team team, int column, int row)
+    {
+        if(stonesTurningOver.Count > 0)
+        {
+            return -1;
+        }
+
         Tile tile = tiles[column, row];
         if(tile.Team != Team.None)
         {
-            return false;
+            return -1;
         }
 
         tile.Team = team;
@@ -63,12 +87,12 @@ public class Board : MonoBehaviour
         {
             player2Tile.Add(tile);
         }
-        FindStoneTurnOver(team, column, row);
+        int score = FindStoneTurnOver(team, column, row);
 
-        return true;
+        return score;
     }
 
-    public void FindStoneTurnOver(Team team, int column, int row)
+    public int FindStoneTurnOver(Team team, int column, int row)
     {
         List<Tile> stoneTurnOver = new List<Tile>();
         List<Tile> tempList = new List<Tile>();
@@ -389,7 +413,8 @@ public class Board : MonoBehaviour
         foreach (Tile turnTile in stoneTurnOver)
         {
             turnTile.Team = team;
-            turnTile.PlaceObject(team);
+            //turnTile.PlaceObject(team);
+            stonesTurningOver.Enqueue(turnTile);
             if (team == Team.Player1)
             {
                 player2Tile.Remove(turnTile);
@@ -401,6 +426,8 @@ public class Board : MonoBehaviour
                 player2Tile.Add(turnTile);
             }
         }
+
+        return stoneTurnOver.Count * ScoreUnit;
     }
 
     public void ClearForPossiblePlaced()
@@ -762,17 +789,17 @@ public class Board : MonoBehaviour
                 }
             }
 
-            if(placeableTiles.Count == 0)
-            {
-                return false;
-            }
-
-            foreach (PlaceableTile placeableTile in placeableTiles)
-            {
-                placeableTile.tile.ShowPossiblePlacement(true);
-            }
-            return true;
         }
+        if (placeableTiles.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (PlaceableTile placeableTile in placeableTiles)
+        {
+            placeableTile.tile.ShowPossiblePlacement(true);
+        }
+        return true;
     }
 
 }
