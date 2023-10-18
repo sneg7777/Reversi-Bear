@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaceableTile
 {
@@ -18,15 +20,25 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject stone1Prefab;
     [SerializeField] private GameObject stone2Prefab;
 
+    [SerializeField] private GameObject showCurrentTurnImage;
+    [SerializeField] private TMP_Text textPlayer1Score;
+    [SerializeField] private TMP_Text textPlayer2Score;
+
+
     private GameObject tilesParent;
     private Tile[,] tiles;
-    [SerializeField] private List<Tile> player1Tile = new List<Tile>();
-    [SerializeField] private List<Tile> player2Tile = new List<Tile>();
+    private List<Tile> player1Tile = new List<Tile>();
+    private List<Tile> player2Tile = new List<Tile>();
     private List<PlaceableTile> placeableTiles = new List<PlaceableTile>();
 
     private Queue<Tile> stonesTurningOver = new Queue<Tile>();
     private float turningOverTick;
 
+
+
+    public GameObject ShowTurnImage { get { return showCurrentTurnImage; } }
+    public TMP_Text TextPlayer1Score { get { return textPlayer1Score; } }
+    public TMP_Text TextPlayer2Score { get { return textPlayer2Score; } }
     public Tile[,] Tiles { get { return tiles; } }
     public int CountStoneTurningOver { get { return stonesTurningOver.Count; } }
 
@@ -44,20 +56,24 @@ public class Board : MonoBehaviour
             tile.Number = i;
             tile.Team = Team.None;
             obj.transform.SetParent(tilesParent.transform);
+            obj.transform.localScale = Vector3.one;
 
             tiles[i / CountLines, i % CountLines] = tile;
         }
+        turningOverTick = TurningOverDelay;
     }
 
     public void Update()
     {
-        turningOverTick -= Time.deltaTime;
-        if (stonesTurningOver.Count > 0 && turningOverTick < 0f)
+        if (stonesTurningOver.Count > 0)
         {
-            Tile tile = stonesTurningOver.Dequeue();
-            turningOverTick = TurningOverDelay;
-            tile.PlaceObject(tile.Team);
-
+            turningOverTick -= Time.deltaTime;
+            if(turningOverTick < 0)
+            {
+                Tile tile = stonesTurningOver.Dequeue();
+                turningOverTick = TurningOverDelay;
+                tile.PlaceObject(tile.Team);
+            }
         }
     }
 
@@ -848,5 +864,4 @@ public class Board : MonoBehaviour
 
         return true;
     }
-
 }

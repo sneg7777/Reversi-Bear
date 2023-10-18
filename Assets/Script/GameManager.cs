@@ -1,39 +1,86 @@
 using GoblinGames.DesignPattern;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum GameMode
+{
+    AiMode,
+    P2Mode,
+}
+
+public enum Team2
+{
+    None,
+    Player1,
+    Player2,
+    Impediments,
+}
 
 public class GameManager : MonoSingleton<GameManager>
 {
     private GameController gameController;
     [SerializeField] private Board board;
-    [SerializeField] private GameObject showCurrentTurnImage;
-    [SerializeField] private TMP_Text textPlayer1Score;
-    [SerializeField] private TMP_Text textPlayer2Score;
+    private GameMode gameMode;
 
     public GameController GameController { get { return gameController; } }
     public Board Board { get { return board; } }
-    public GameObject ShowTurnImage { get { return showCurrentTurnImage; } }
-    public TMP_Text TextPlayer1Score { get { return textPlayer1Score; } }
-    public TMP_Text TextPlayer2Score { get { return textPlayer2Score; } }
     // Start is called before the first frame update
 
-    protected override void Awake()
+    private void OnEnable()
     {
-        base.Awake();
-
-        //gameController = new SingleModeController();
-        gameController = new AiModeController();
+        SceneManager.sceneLoaded += LoadedsceneEvent;
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        gameController.InitGame();
+        SceneManager.sceneLoaded -= LoadedsceneEvent;
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameController.Update();
+        if (gameController != null)
+        {
+            gameController.Update();
+        }
     }
 
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void SetGameMode(GameMode mode)
+    {
+        gameMode = mode;
+    }
+
+    private void LoadedsceneEvent(Scene scene, LoadSceneMode mode)
+    {
+        string sceneName = scene.name;
+        if (sceneName.CompareTo("InGame") == 0)
+        {
+            board = GameObject.Find("Board").GetComponent<Board>();
+
+            switch (gameMode)
+            {
+                case GameMode.AiMode:
+                    {
+                        gameController = new AiModeController();
+                        break;
+                    }
+                case GameMode.P2Mode:
+                    {
+                        gameController = new SingleModeController();
+                        break;
+                    }
+            }
+
+            gameController.InitGame();
+        }
+        else if (sceneName.CompareTo("Title") == 0)
+        {
+            board = null;
+        }
+    }
 }
