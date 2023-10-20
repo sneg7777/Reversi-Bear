@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlaceableTile
 {
@@ -97,7 +99,7 @@ public class Board : MonoBehaviour
         {
             player1Tile.Add(tile);
         }
-        else
+        else if(team == Team.Player2)
         {
             player2Tile.Add(tile);
         }
@@ -138,6 +140,46 @@ public class Board : MonoBehaviour
         int score = PlaceStone(Team.Player2, tileNumber / CountLines, tileNumber % CountLines);
 
         return score;
+    }
+
+    public void SettingPlacedImpediments(int count)
+    {
+        int random;
+        List<int> numberAlreadyPlaced = new List<int>();
+        for (int i = 0; i < count; i++)
+        {
+            while (true)
+            {
+                random = Random.Range(0, CountLines * CountLines);
+
+                if(random == 27 || random == 28 || random == 35 || random == 36)
+                {
+                    continue;
+                }
+
+                bool checkAlreadyPlaced = false;
+                foreach(int number in numberAlreadyPlaced)
+                {
+                    if(random == number)
+                    {
+                        checkAlreadyPlaced = true;
+                        break;
+                    }
+                }
+                if(!checkAlreadyPlaced)
+                {
+                    break;
+                }
+            }
+
+            Tile tile = tiles[random / CountLines, random % CountLines];
+
+            tile.Team = Team.Impediments;
+            tile.PlaceObject(Team.Impediments);
+            numberAlreadyPlaced.Add(random);
+        }
+
+
     }
 
     public int FindStoneTurnOver(Team team, int column, int row)

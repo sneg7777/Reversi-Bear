@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private GameObject stone_Player1;
     [SerializeField] private GameObject stone_Player2;
+    [SerializeField] private GameObject stone_Impediments;
     [SerializeField] private GameObject stoneCanPlaced;
     private Board board;
     [SerializeField] private int number;
@@ -52,6 +53,11 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             case Team.Player2:
                 {
                     stone_Player2.SetActive(true);
+                    break;
+                }
+            case Team.Impediments:
+                {
+                    stone_Impediments.SetActive(true);
                     break;
                 }
         }

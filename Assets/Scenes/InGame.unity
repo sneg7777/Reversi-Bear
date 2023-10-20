@@ -471,6 +471,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6983094315603828475, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339591199678426373, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
+      propertyPath: m_text
+      value: Set
+      objectReference: {fileID: 0}
     - target: {fileID: 7512855446928621260, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -555,7 +563,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2467402098291014808, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
 --- !u!224 &2467402097932481021 stripped
 RectTransform:

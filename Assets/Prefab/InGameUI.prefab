@@ -989,6 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonBackScene: {fileID: 4818955540137442427}
+  buttonOpenSettingPopup: {fileID: 8938413704179345788}
 --- !u!1 &3141665707183054903
 GameObject:
   m_ObjectHideFlags: 0

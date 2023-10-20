@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class AiModeController : GameController
 {
-    private const float delayPlacedByAi = 1.2f;
-    private float tickPlacedByAi = 1.2f;
+    private const float delayPlacedByAi = 1f;
+    private float tickPlacedByAi = 1f;
     // Start is called before the first frame update
     void Start()
     {
