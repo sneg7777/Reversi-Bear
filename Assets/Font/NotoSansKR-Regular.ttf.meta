@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 5fcb3b6a98ea3b24daa4d30ac9aa265b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Noto Sans KR
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 74f184dd8dd39094da807386941d6b29, type: 3}
+  - {fileID: 12800000, guid: 6eecf69a5930bf540aa5b3306baedcb0, type: 3}
+  - {fileID: 12800000, guid: e1c3f8edacdef264598e39aa9f588224, type: 3}
+  - {fileID: 12800000, guid: b5c53b2f95fd09f43b23fbdbf1466b51, type: 3}
+  - {fileID: 12800000, guid: 7119a343a5ed94641b29294eb1ae46fe, type: 3}
+  - {fileID: 12800000, guid: 0b497dc72d429e74986833fe6b53fc16, type: 3}
+  - {fileID: 12800000, guid: 27fd8683a0eff2c48a214e875018407d, type: 3}
+  - {fileID: 12800000, guid: a9b9fff2a1e63bd46916b57d71e6d472, type: 3}
+  - {fileID: 12800000, guid: 438d2662d76f2d54fa01cc3745d60745, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
