@@ -67,14 +67,19 @@ public class Board : MonoBehaviour
 
     public void Update()
     {
-        if (stonesTurningOver.Count > 0)
+        ProcessTurnOverDelay();
+    }
+
+    private void ProcessTurnOverDelay()
+    {
+        if(stonesTurningOver.Count > 0)
         {
             turningOverTick -= Time.deltaTime;
-            if(turningOverTick < 0)
+            if (turningOverTick < 0)
             {
                 Tile tile = stonesTurningOver.Dequeue();
                 turningOverTick = TurningOverDelay;
-                tile.PlaceObject(tile.Team);
+                tile.TurningOverStone(tile.Team);
             }
         }
     }
@@ -92,7 +97,6 @@ public class Board : MonoBehaviour
             return -1;
         }
 
-        tile.Team = team;
         tile.PlaceObject(team);
 
         if (team == Team.Player1)
@@ -174,7 +178,6 @@ public class Board : MonoBehaviour
 
             Tile tile = tiles[random / CountLines, random % CountLines];
 
-            tile.Team = Team.Impediments;
             tile.PlaceObject(Team.Impediments);
             numberAlreadyPlaced.Add(random);
         }

@@ -97,6 +97,7 @@ MonoBehaviour:
   stone_Player2: {fileID: 3029495882496697835}
   stone_Impediments: {fileID: 7324700488929823088}
   stoneCanPlaced: {fileID: 4553251018009111276}
+  stoneCanPlacedImage: {fileID: 218010593772743425}
   number: 0
   team: 0
 --- !u!1001 &238623364176510934
@@ -307,6 +308,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b748f29f5e2a2a4aa1d02f223df375f, type: 3}
+--- !u!114 &218010593772743425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4536630537247836518, guid: 2b748f29f5e2a2a4aa1d02f223df375f, type: 3}
+  m_PrefabInstance: {fileID: 4464155793922482791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553251018009111276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4553251018009111276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 199209138282956939, guid: 2b748f29f5e2a2a4aa1d02f223df375f, type: 3}

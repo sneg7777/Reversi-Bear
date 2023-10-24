@@ -8,14 +8,6 @@ public enum GameMode
     P2Mode,
 }
 
-public enum Team2
-{
-    None,
-    Player1,
-    Player2,
-    Impediments,
-}
-
 public class GameManager : MonoSingleton<GameManager>
 {
     private GameController gameController;
