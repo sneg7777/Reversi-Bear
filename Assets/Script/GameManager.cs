@@ -13,9 +13,11 @@ public class GameManager : MonoSingleton<GameManager>
     private GameController gameController;
     [SerializeField] private Board board;
     private GameMode gameMode;
+    private int countImpediments;
 
     public GameController GameController { get { return gameController; } }
     public Board Board { get { return board; } }
+    public int CountImpediments { get { return countImpediments; } set { countImpediments = value; } }
     // Start is called before the first frame update
 
     private void OnEnable()

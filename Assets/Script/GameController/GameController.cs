@@ -13,7 +13,7 @@ public class GameController
         GameManager.Instance.Board.PlaceStone(Team.Player1, 36 / Board.CountLines, 36 % Board.CountLines);
 
         Board board = GameManager.Instance.Board;
-        board.SettingPlacedImpediments(6);
+        board.SettingPlacedImpediments(GameManager.Instance.CountImpediments);
         board.SearchForPossiblePlaced(turn, true);
     }
 
