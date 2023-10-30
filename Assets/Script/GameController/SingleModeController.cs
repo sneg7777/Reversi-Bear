@@ -26,7 +26,7 @@ public class SingleModeController : GameController
         board.ClearForPossiblePlaced();
         if (!board.SearchForPossiblePlaced(turn, true))
         {
-            PassTurn();
+            AutoPassTurn();
             if (!board.SearchForPossiblePlaced(turn, true))
             {
                 GameEnd();

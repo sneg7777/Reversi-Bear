@@ -66,7 +66,7 @@ public class AiModeController : GameController
             AddScore(Team.Player2, score);
             if (!board.SearchForPossiblePlaced(turn, true))
             {
-                PassTurn();
+                AutoPassTurn();
             }
         }
     }

@@ -467,6 +467,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1258079954}
     m_Modifications:
+    - target: {fileID: 1747852578418494983, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 430
+      objectReference: {fileID: 0}
     - target: {fileID: 2816927671870069551, guid: 479cb56a8e0219d43b9bed279905c645, type: 3}
       propertyPath: m_Name
       value: InGameUI

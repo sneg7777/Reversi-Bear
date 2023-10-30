@@ -45,9 +45,15 @@ public class GameController
         }
     }
 
+    protected void AutoPassTurn()
+    {
+        GameManager.Instance.InGameUI.SetAlarm(AlarmKind.AutoPassTurn);
+        PassTurn();
+    }
+
     protected void GameEnd()
     {
-
+        GameManager.Instance.InGameUI.SetAlarm(AlarmKind.GameEnd);
     }
 
     protected void AddScore(Team team, int score)

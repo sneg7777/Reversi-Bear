@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -49,7 +48,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        if(this.team == Team.Player1 || this.team == Team.Player2)
+        if (this.team == Team.Player1 || this.team == Team.Player2)
         {
             isTurn = true;
             isHalfTurn = false;
@@ -154,14 +153,14 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        if(!isHalfTurn)
+        if (!isHalfTurn)
         {
             rotateY += Time.deltaTime * 400f;
-            if(rotateY > 90f)
+            if (rotateY > 90f)
             {
                 isHalfTurn = true;
                 rotateY = 90f;
-                switch(nextTeam)
+                switch (nextTeam)
                 {
                     case Team.Player1:
                         {
@@ -181,7 +180,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         else
         {
             rotateY -= Time.deltaTime * 400f;
-            if(rotateY < 0f)
+            if (rotateY < 0f)
             {
                 isTurn = false;
                 rotateY = 0f;

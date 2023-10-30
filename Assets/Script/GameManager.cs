@@ -11,12 +11,14 @@ public enum GameMode
 public class GameManager : MonoSingleton<GameManager>
 {
     private GameController gameController;
-    [SerializeField] private Board board;
+    private Board board;
+    private InGameUI inGameUI;
     private GameMode gameMode;
     private int countImpediments;
 
     public GameController GameController { get { return gameController; } }
     public Board Board { get { return board; } }
+    public InGameUI InGameUI { get { return inGameUI; } }
     public int CountImpediments { get { return countImpediments; } set { countImpediments = value; } }
     // Start is called before the first frame update
 
@@ -55,6 +57,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (sceneName.CompareTo("InGame") == 0)
         {
             board = GameObject.Find("Board").GetComponent<Board>();
+            inGameUI = GameObject.Find("InGameUI").GetComponent<InGameUI>();
 
             switch (gameMode)
             {

@@ -6,6 +6,7 @@ public class Title : MonoBehaviour
     [SerializeField] private Button buttonAiMode;
     [SerializeField] private Button buttonP2Mode;
     [SerializeField] private PopupSlider PopupSetImpediments;
+    [SerializeField] private GameObject popups;
 
     private void OnEnable()
     {
@@ -27,18 +28,30 @@ public class Title : MonoBehaviour
 
     }
 
+    public void OpenPopup(TitlePopupKind kind)
+    {
+        int popupCount = popups.transform.childCount;
+        for (int i = 0; i < popupCount; i++)
+        {
+            popups.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        popups.transform.GetChild((int)kind).gameObject.SetActive(true);
+        popups.transform.GetChild((int)kind).GetComponent<Popup>().OnOpen();
+        popups.SetActive(true);
+    }
+
     private void OnClickAiMode()
     {
         GameManager gameManager = GameManager.Instance;
         gameManager.SetGameMode(GameMode.AiMode);
-        PopupSetImpediments.gameObject.SetActive(true);
+        OpenPopup(TitlePopupKind.SetImpediments);
     }
 
     private void OnClickP2Mode()
     {
         GameManager gameManager = GameManager.Instance;
         gameManager.SetGameMode(GameMode.P2Mode);
-        PopupSetImpediments.gameObject.SetActive(true);
+        OpenPopup(TitlePopupKind.SetImpediments);
     }
 
     private void OnClickPopupSetImpedimentsOk()

@@ -1,10 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum InGamePopupKind
+{
+    BackTitleScene,
+    GameResult,
+}
+
+public enum TitlePopupKind
+{
+    SetImpediments,
+}
+
+
 public class Popup : MonoBehaviour
 {
-    [SerializeField] private Button buttonClose;
-    [SerializeField] private Button buttonOk;
+    [SerializeField] protected Button buttonClose;
+    [SerializeField] protected Button buttonOk;
 
     public Button ButtonCancel { get { return buttonClose; } }
     public Button ButtonOk { get { return buttonOk; } }
@@ -19,9 +31,16 @@ public class Popup : MonoBehaviour
         buttonClose.onClick.RemoveListener(OnClickCancel);
     }
 
+    public virtual void OnOpen()
+    {
+
+    }
+
     private void OnClickCancel()
     {
         gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
+
 
 }
