@@ -3,6 +3,8 @@ public class GameController
     protected Team turn;
     protected int player1Score;
     protected int player2Score;
+    
+
     // Start is called before the first frame update
     public virtual void InitGame()
     {
@@ -54,6 +56,7 @@ public class GameController
     protected void GameEnd()
     {
         GameManager.Instance.InGameUI.SetAlarm(AlarmKind.GameEnd);
+        SetGameResult();
     }
 
     protected void AddScore(Team team, int score)
@@ -69,5 +72,12 @@ public class GameController
             player2Score += score;
             gameManager.Board.TextPlayer2Score.text = "Player : " + player2Score;
         }
+    }
+
+    protected void SetGameResult()
+    {
+        Board board = GameManager.Instance.Board;
+        GameManager.Instance.InGameUI.SetPopupGameResult(board.CountPlayer1Stone, player1Score, board.CountPlayer2Stone, player2Score);
+        GameManager.Instance.InGameUI.OpenPopup(InGamePopupKind.GameResult);
     }
 }

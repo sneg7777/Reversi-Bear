@@ -23,12 +23,12 @@ public class Popup : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        buttonClose.onClick.AddListener(OnClickCancel);
+        buttonClose.onClick.AddListener(OnClickClose);
     }
 
     protected virtual void OnDisable()
     {
-        buttonClose.onClick.RemoveListener(OnClickCancel);
+        buttonClose.onClick.RemoveListener(OnClickClose);
     }
 
     public virtual void OnOpen()
@@ -36,7 +36,7 @@ public class Popup : MonoBehaviour
 
     }
 
-    private void OnClickCancel()
+    protected virtual void OnClickClose()
     {
         gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);

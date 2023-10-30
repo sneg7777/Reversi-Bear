@@ -44,6 +44,9 @@ public class Board : MonoBehaviour
     public Tile[,] Tiles { get { return tiles; } }
     public int CountStoneTurningOver { get { return stonesTurningOver.Count; } }
 
+    public int CountPlayer1Stone { get { return player1Tile.Count; } }
+    public int CountPlayer2Stone { get { return player2Tile.Count; } }
+
     public void Awake()
     {
         tilesParent = transform.GetChild(0).gameObject;

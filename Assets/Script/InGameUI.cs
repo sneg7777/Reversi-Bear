@@ -7,7 +7,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private Button buttonOpenSettingPopup;
     [SerializeField] private GameObject popups;
     [SerializeField] private InGameAlarm alarm;
-
+    [SerializeField] private PopupGameResult popupGameResult;
 
     private void OnEnable()
     {
@@ -23,7 +23,7 @@ public class InGameUI : MonoBehaviour
         int popupCount = popups.transform.childCount;
         for (int i = 0; i < popupCount; i++)
         {
-            popups.transform.GetChild(i).GetComponent<Popup>().ButtonOk.onClick.RemoveAllListeners();
+            popups.transform.GetChild(i).GetComponent<Popup>().ButtonOk?.onClick.RemoveAllListeners();
         }
     }
 
@@ -48,6 +48,25 @@ public class InGameUI : MonoBehaviour
     {
         popups.transform.GetChild((int)kind).gameObject.SetActive(false);
         popups.SetActive(false);
+    }
+
+    public void SetPopupGameResult(int player1Count, int player1Score, int player2Count, int player2Score)
+    {
+        popupGameResult.TextPlayer1_Count.text = "Count : " + player1Count;
+        popupGameResult.TextPlayer1_Score.text = "Score : " + player1Score;
+        popupGameResult.TextPlayer2_Count.text = "Count : " + player2Count;
+        popupGameResult.TextPlayer2_Score.text = "Score : " + player2Score;
+
+        if(player1Count > player2Count)
+        {
+            popupGameResult.TextPlayer1_Result.text = "Win !";
+            popupGameResult.TextPlayer2_Result.text = "Lose..";
+        }
+        else
+        {
+            popupGameResult.TextPlayer1_Result.text = "Lose..";
+            popupGameResult.TextPlayer2_Result.text = "Win !";
+        }
     }
 
     private void OnClickBackTitleScene()
