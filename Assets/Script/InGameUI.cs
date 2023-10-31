@@ -52,6 +52,9 @@ public class InGameUI : MonoBehaviour
 
     public void SetPopupGameResult(int player1Count, int player1Score, int player2Count, int player2Score)
     {
+        float time = GameManager.Instance.InGameTime;
+        popupGameResult.TextGameTime.text = "Time : " + Mathf.FloorToInt(time / 60f) + ": " + Mathf.RoundToInt(time % 60f);
+
         popupGameResult.TextPlayer1_Count.text = "Count : " + player1Count;
         popupGameResult.TextPlayer1_Score.text = "Score : " + player1Score;
         popupGameResult.TextPlayer2_Count.text = "Count : " + player2Count;

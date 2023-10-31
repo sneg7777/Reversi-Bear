@@ -15,11 +15,13 @@ public class GameManager : MonoSingleton<GameManager>
     private InGameUI inGameUI;
     private GameMode gameMode;
     private int countImpediments;
+    private float inGameTime;
 
     public GameController GameController { get { return gameController; } }
     public Board Board { get { return board; } }
     public InGameUI InGameUI { get { return inGameUI; } }
     public int CountImpediments { get { return countImpediments; } set { countImpediments = value; } }
+    public float InGameTime { get {  return inGameTime; } }
     // Start is called before the first frame update
 
     private void OnEnable()
@@ -38,6 +40,11 @@ public class GameManager : MonoSingleton<GameManager>
         if (gameController != null)
         {
             gameController.Update();
+        }
+
+        if( board != null)
+        {
+            inGameTime += Time.deltaTime;
         }
     }
 
@@ -58,6 +65,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             board = GameObject.Find("Board").GetComponent<Board>();
             inGameUI = GameObject.Find("InGameUI").GetComponent<InGameUI>();
+            inGameTime = 0f;
 
             switch (gameMode)
             {

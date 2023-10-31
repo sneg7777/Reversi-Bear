@@ -1,8 +1,17 @@
+using UnityEngine;
+
 public class GameController
 {
+    protected const float ShowResultDelay = 2f;
+
     protected Team turn;
     protected int player1Score;
     protected int player2Score;
+    protected bool isGameEnd;
+    protected float showResultTick;
+    protected bool isShowResult;
+
+
     
 
     // Start is called before the first frame update
@@ -22,7 +31,20 @@ public class GameController
     // Update is called once per frame
     public virtual void Update()
     {
+        ProcessGameEnd();
+    }
 
+    protected void ProcessGameEnd()
+    {
+        if (isGameEnd)
+        {
+            showResultTick -= Time.deltaTime;
+            if (showResultTick < 0f && !isShowResult)
+            {
+                isShowResult = true;
+                SetGameResult();
+            }
+        }
     }
 
     public virtual void ClickOnTile(Tile tile)
@@ -55,8 +77,9 @@ public class GameController
 
     protected void GameEnd()
     {
+        isGameEnd = true;
+        showResultTick = ShowResultDelay;
         GameManager.Instance.InGameUI.SetAlarm(AlarmKind.GameEnd);
-        SetGameResult();
     }
 
     protected void AddScore(Team team, int score)

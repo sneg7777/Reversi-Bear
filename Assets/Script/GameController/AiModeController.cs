@@ -13,6 +13,12 @@ public class AiModeController : GameController
     // Update is called once per frame
     public override void Update()
     {
+        base.Update();
+        if(isGameEnd)
+        {
+            return;
+        }
+
         ProcessAi();
     }
 
