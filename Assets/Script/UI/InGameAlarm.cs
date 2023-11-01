@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public enum AlarmKind
@@ -17,7 +14,7 @@ public class InGameAlarm : MonoBehaviour
 
     [SerializeField] private RectTransform rect;
     [SerializeField] private GameObject textsAlarm;
-    
+
     private bool isAlarm;
     private bool isAlarmShowComplete;
     private float xVelocity = 2.0f;

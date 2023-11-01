@@ -4,13 +4,7 @@ public class AiModeController : GameController
 {
     private const float delayPlacedByAi = 1f;
     private float tickPlacedByAi = 1f;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     public override void Update()
     {
         base.Update();

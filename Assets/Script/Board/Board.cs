@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlaceableTile
 {
@@ -75,7 +72,7 @@ public class Board : MonoBehaviour
 
     private void ProcessTurnOverDelay()
     {
-        if(stonesTurningOver.Count > 0)
+        if (stonesTurningOver.Count > 0)
         {
             turningOverTick -= Time.deltaTime;
             if (turningOverTick < 0)
@@ -106,7 +103,7 @@ public class Board : MonoBehaviour
         {
             player1Tile.Add(tile);
         }
-        else if(team == Team.Player2)
+        else if (team == Team.Player2)
         {
             player2Tile.Add(tile);
         }
@@ -159,21 +156,21 @@ public class Board : MonoBehaviour
             {
                 random = Random.Range(0, CountLines * CountLines);
 
-                if(random == 27 || random == 28 || random == 35 || random == 36)
+                if (random == 27 || random == 28 || random == 35 || random == 36)
                 {
                     continue;
                 }
 
                 bool checkAlreadyPlaced = false;
-                foreach(int number in numberAlreadyPlaced)
+                foreach (int number in numberAlreadyPlaced)
                 {
-                    if(random == number)
+                    if (random == number)
                     {
                         checkAlreadyPlaced = true;
                         break;
                     }
                 }
-                if(!checkAlreadyPlaced)
+                if (!checkAlreadyPlaced)
                 {
                     break;
                 }

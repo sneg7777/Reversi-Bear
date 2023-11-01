@@ -28,7 +28,6 @@ public class GameController
         board.SearchForPossiblePlaced(turn, true);
     }
 
-    // Update is called once per frame
     public virtual void Update()
     {
         ProcessGameEnd();

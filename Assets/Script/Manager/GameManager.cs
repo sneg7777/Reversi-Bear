@@ -21,8 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Board Board { get { return board; } }
     public InGameUI InGameUI { get { return inGameUI; } }
     public int CountImpediments { get { return countImpediments; } set { countImpediments = value; } }
-    public float InGameTime { get {  return inGameTime; } }
-    // Start is called before the first frame update
+    public float InGameTime { get { return inGameTime; } }
 
     private void OnEnable()
     {
@@ -34,7 +33,6 @@ public class GameManager : MonoSingleton<GameManager>
         SceneManager.sceneLoaded -= LoadedsceneEvent;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameController != null)
@@ -42,7 +40,7 @@ public class GameManager : MonoSingleton<GameManager>
             gameController.Update();
         }
 
-        if( board != null)
+        if (board != null)
         {
             inGameTime += Time.deltaTime;
         }

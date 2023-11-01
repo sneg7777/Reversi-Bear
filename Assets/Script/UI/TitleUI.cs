@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Title : MonoBehaviour
+public class TitleUI : MonoBehaviour
 {
     [SerializeField] private Button buttonAiMode;
     [SerializeField] private Button buttonP2Mode;
@@ -20,12 +20,6 @@ public class Title : MonoBehaviour
         buttonAiMode.onClick.RemoveListener(OnClickAiMode);
         buttonP2Mode.onClick.RemoveListener(OnClickP2Mode);
         PopupSetImpediments.ButtonOk.onClick.RemoveListener(OnClickPopupSetImpedimentsOk);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void OpenPopup(TitlePopupKind kind)
