@@ -26,11 +26,13 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnEnable()
     {
         SceneManager.sceneLoaded += LoadedsceneEvent;
+        AdMobManager.Instance.onHandleRewardedAdClosed += OnAdClosed;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= LoadedsceneEvent;
+        AdMobManager.Instance.onHandleRewardedAdClosed -= OnAdClosed;
     }
 
     void Update()
@@ -48,7 +50,15 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (sceneName.CompareTo("Title") != 0)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            AdMobManager.Instance.Init();
+            AdMobManager.Instance.ShowAds();
+        }
     }
 
     public void SetGameMode(GameMode mode)
@@ -85,5 +95,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             board = null;
         }
+    }
+
+    public void OnAdClosed()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
