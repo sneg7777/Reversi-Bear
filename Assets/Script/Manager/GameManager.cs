@@ -23,7 +23,7 @@ public class GameManager : MonoSingleton<GameManager>
     public int CountImpediments { get { return countImpediments; } set { countImpediments = value; } }
     public float InGameTime { get { return inGameTime; } }
 
-    private void OnEnable()
+    private void Start()
     {
         SceneManager.sceneLoaded += LoadedsceneEvent;
         AdMobManager.Instance.onHandleRewardedAdClosed += OnAdClosed;

@@ -444,8 +444,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB458 \uACF3\uC774 \uC5C6\uAE30 \uB54C\uBB38\uC5D0 \uC790\uB3D9\uC73C\uB85C\n\uD134\uC774
-    \uB118\uC5B4\uAC11\uB2C8\uB2E4\n"
+  m_text: 'There is no place to put it,
+
+    so the turn automatically passes.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a338e93a33e8d6c40a5ffddf9a3e0a87, type: 2}
   m_sharedMaterial: {fileID: 961705310748722481, guid: a338e93a33e8d6c40a5ffddf9a3e0a87, type: 2}
@@ -472,8 +473,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2281,8 +2282,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC11C\uB85C \uB458 \uACF3\uC774 \uC5C6\uAE30 \uB54C\uBB38\uC5D0\n\uAC8C\uC784\uC774
-    \uC885\uB8CC \uB429\uB2C8\uB2E4 !"
+  m_text: "The game ends because there is no \nplace to put each other.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a338e93a33e8d6c40a5ffddf9a3e0a87, type: 2}
   m_sharedMaterial: {fileID: 961705310748722481, guid: a338e93a33e8d6c40a5ffddf9a3e0a87, type: 2}
@@ -2309,8 +2309,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
