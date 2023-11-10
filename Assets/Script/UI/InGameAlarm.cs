@@ -8,8 +8,8 @@ public enum AlarmKind
 
 public class InGameAlarm : MonoBehaviour
 {
-    public const float AlarmOnPosX = 2.737921f;
-    public const float AlarmOffPosX = 6.5f;
+    public const float AlarmOnPosX = 1420;
+    public const float AlarmOffPosX = 2300f;
     public const float AlarmDelay = 1f;
 
     [SerializeField] private RectTransform rect;

@@ -38,15 +38,15 @@ public class AdMobManager : MonoBehaviour
 #if UNITY_EDITOR
 		string adUnitId = "unused";
 #elif UNITY_ANDROID
-        adUnitId = "ca-app-pub-3380965308864260~8225004211";
+        adUnitId = "ca-app-pub-3380965308864260~9781993420";
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3380965308864260~8225004211";
+        string adUnitId = "ca-app-pub-3380965308864260~9781993420";
 #else
         string adUnitId = "unexpected_platform";
 #endif
 
-		// 모바일 광고 SDK를 초기화함.
-		MobileAds.Initialize(initStatus => { });
+        // 모바일 광고 SDK를 초기화함.
+        MobileAds.Initialize(initStatus => { });
 
 		//광고 로드 : RewardedAd 객체의 loadAd메서드에 AdRequest 인스턴스를 넣음
 		AdRequest request = new AdRequest.Builder().Build();
