@@ -8,8 +8,8 @@ public enum AlarmKind
 
 public class InGameAlarm : MonoBehaviour
 {
-    public const float AlarmOnPosX = 1420;
-    public const float AlarmOffPosX = 2300f;
+    public const float AlarmOnPosX = 1070f;
+    public const float AlarmOffPosX = 2240f;
     public const float AlarmDelay = 1f;
 
     [SerializeField] private RectTransform rect;
@@ -42,6 +42,7 @@ public class InGameAlarm : MonoBehaviour
             textsAlarm.transform.GetChild(i).gameObject.SetActive(false);
         }
         textsAlarm.transform.GetChild((int)kind).gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     private void ProcessAlarm()
@@ -57,7 +58,7 @@ public class InGameAlarm : MonoBehaviour
             posX = Mathf.SmoothDamp(rect.position.x, AlarmOnPosX, ref xVelocity, 0.4f);
             rect.position = new Vector3(posX, rect.position.y, rect.position.z);
 
-            if (Mathf.Abs(AlarmOnPosX - rect.position.x) < 0.01f)
+            if (Mathf.Abs(AlarmOnPosX - rect.position.x) < 0.1f)
             {
                 isAlarmShowComplete = true;
                 alarmTick = AlarmDelay;
@@ -72,11 +73,12 @@ public class InGameAlarm : MonoBehaviour
 
                 posX = Mathf.SmoothDamp(rect.position.x, AlarmOffPosX, ref xVelocity, 0.4f);
                 rect.position = new Vector3(posX, rect.position.y, rect.position.z);
-                if (Mathf.Abs(AlarmOffPosX - rect.position.x) < 0.01f)
+                if (Mathf.Abs(AlarmOffPosX - rect.position.x) < 0.1f)
                 {
                     isAlarm = false;
                     isAlarmShowComplete = false;
                     rect.position = new Vector3(AlarmOffPosX, rect.position.y, rect.position.z);
+                    gameObject.SetActive(false);
                 }
             }
 

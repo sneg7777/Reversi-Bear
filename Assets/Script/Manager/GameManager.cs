@@ -27,12 +27,14 @@ public class GameManager : MonoSingleton<GameManager>
     {
         SceneManager.sceneLoaded += LoadedsceneEvent;
         AdMobManager.Instance.onHandleRewardedAdClosed += OnAdClosed;
+        AdMobManager.Instance.onHandleRewardedAdFailedToShow += OnAdClosed;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= LoadedsceneEvent;
         AdMobManager.Instance.onHandleRewardedAdClosed -= OnAdClosed;
+        AdMobManager.Instance.onHandleRewardedAdFailedToShow -= OnAdClosed;
     }
 
     void Update()
