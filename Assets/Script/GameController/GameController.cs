@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class GameController
+public abstract class GameController
 {
+    #region variable
     protected const float ShowResultDelay = 2f;
 
     protected Team turn;
@@ -10,11 +11,8 @@ public class GameController
     protected bool isGameEnd;
     protected float showResultTick;
     protected bool isShowResult;
+    #endregion
 
-
-    
-
-    // Start is called before the first frame update
     public virtual void InitGame()
     {
         turn = Team.Player1;

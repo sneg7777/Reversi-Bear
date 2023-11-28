@@ -52,7 +52,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoadScene(string sceneName)
     {
-        if (sceneName.CompareTo("Title") != 0)
+        if (true/*sceneName.CompareTo("Title") != 0*/)
         {
             SceneManager.LoadScene(sceneName);
         }

@@ -8,9 +8,9 @@ public enum AlarmKind
 
 public class InGameAlarm : MonoBehaviour
 {
-    public const float AlarmOnPosX = 1070f;
-    public const float AlarmOffPosX = 2240f;
-    public const float AlarmDelay = 1f;
+    private float alarmOnPosX;
+    private float alarmOffPosX;
+    private const float alarmDelay = 1f;
 
     [SerializeField] private RectTransform rect;
     [SerializeField] private GameObject textsAlarm;
@@ -20,21 +20,23 @@ public class InGameAlarm : MonoBehaviour
     private float xVelocity = 2.0f;
     private float alarmTick;
 
+    private void Start()
+    {
+        alarmOnPosX = Screen.width - 10f;
+        alarmOffPosX = Screen.width * 2f;
+        rect.position = new Vector3(alarmOffPosX, rect.position.y, rect.position.z);
+    }
 
     private void Update()
     {
         ProcessAlarm();
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SetAlarm(AlarmKind.AutoPassTurn);
-        }
     }
 
     public void SetAlarm(AlarmKind kind)
     {
         isAlarm = true;
         isAlarmShowComplete = false;
-        rect.position = new Vector3(AlarmOffPosX, rect.position.y, rect.position.z);
+        rect.position = new Vector3(alarmOffPosX, rect.position.y, rect.position.z);
 
         int alarmCount = textsAlarm.transform.childCount;
         for (int i = 0; i < alarmCount; i++)
@@ -55,14 +57,14 @@ public class InGameAlarm : MonoBehaviour
         float posX;
         if (!isAlarmShowComplete)
         {
-            posX = Mathf.SmoothDamp(rect.position.x, AlarmOnPosX, ref xVelocity, 0.4f);
+            posX = Mathf.SmoothDamp(rect.position.x, alarmOnPosX, ref xVelocity, 0.4f);
             rect.position = new Vector3(posX, rect.position.y, rect.position.z);
 
-            if (Mathf.Abs(AlarmOnPosX - rect.position.x) < 0.1f)
+            if (Mathf.Abs(alarmOnPosX - rect.position.x) < 0.1f)
             {
                 isAlarmShowComplete = true;
-                alarmTick = AlarmDelay;
-                rect.position = new Vector3(AlarmOnPosX, rect.position.y, rect.position.z);
+                alarmTick = alarmDelay;
+                rect.position = new Vector3(alarmOnPosX, rect.position.y, rect.position.z);
             }
         }
         else
@@ -71,13 +73,13 @@ public class InGameAlarm : MonoBehaviour
             if (alarmTick < 0f)
             {
 
-                posX = Mathf.SmoothDamp(rect.position.x, AlarmOffPosX, ref xVelocity, 0.4f);
+                posX = Mathf.SmoothDamp(rect.position.x, alarmOffPosX, ref xVelocity, 0.4f);
                 rect.position = new Vector3(posX, rect.position.y, rect.position.z);
-                if (Mathf.Abs(AlarmOffPosX - rect.position.x) < 0.1f)
+                if (Mathf.Abs(alarmOffPosX - rect.position.x) < 0.1f)
                 {
                     isAlarm = false;
                     isAlarmShowComplete = false;
-                    rect.position = new Vector3(AlarmOffPosX, rect.position.y, rect.position.z);
+                    rect.position = new Vector3(alarmOffPosX, rect.position.y, rect.position.z);
                     gameObject.SetActive(false);
                 }
             }

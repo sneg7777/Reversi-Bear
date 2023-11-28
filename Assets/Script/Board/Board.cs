@@ -506,7 +506,6 @@ public class Board : MonoBehaviour
         foreach (Tile turnTile in stoneTurnOver)
         {
             turnTile.Team = team;
-            //turnTile.PlaceObject(team);
             stonesTurningOver.Enqueue(turnTile);
             if (team == Team.Player1)
             {
